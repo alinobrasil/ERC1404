@@ -6,8 +6,8 @@ contract Whitelist {
     mapping(address => bool) public whitelist;
     address[] public tempWhitelist;
 
-    event Added(address addressAdded); //emit when an address gets added to whitelist
-    event Removed(address addressRemoved); //emit when an address gets removed from whitelist
+    event Added(address indexed addressAdded); //emit when an address gets added to whitelist
+    event Removed(address indexed addressRemoved); //emit when an address gets removed from whitelist
 
     constructor() {
         owner = msg.sender;
