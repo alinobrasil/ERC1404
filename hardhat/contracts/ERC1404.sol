@@ -51,5 +51,32 @@ contract ERC1404 is ERC20 {
         return codeMessage[restrictionCode];
     }
 
-    //should overwrite transfer/transferFRom functions so that they revert if a transfer restriction is detected
+    //overwrite transfer/transferFRom functions so that they revert if a transfer restriction is detected
+    function transfer(address to, uint256 amount)
+        public
+        virtual
+        override
+        returns (bool)
+    {
+        // added logic restricting transfers
+        require(detectTransferRestriction(msg.sender, to, amount) == 0);
+
+        address owner = _msgSender();
+        _transfer(owner, to, amount);
+        return true;
+    }
+
+    function transferFrom(
+        address from,
+        address to,
+        uint256 amount
+    ) public virtual override returns (bool) {
+        // added logic restricting transfers
+        require(detectTransferRestriction(from, to, amount) == 0);
+
+        address spender = _msgSender();
+        _spendAllowance(from, spender, amount);
+        _transfer(from, to, amount);
+        return true;
+    }
 }
