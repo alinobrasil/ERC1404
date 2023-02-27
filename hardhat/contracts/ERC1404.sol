@@ -59,7 +59,10 @@ contract ERC1404 is ERC20 {
         returns (bool)
     {
         // added logic restricting transfers
-        require(detectTransferRestriction(msg.sender, to, amount) == 0);
+        require(
+            detectTransferRestriction(msg.sender, to, amount) == 0,
+            "ERC1404 Transfer Restriction Detected"
+        );
 
         address owner = _msgSender();
         _transfer(owner, to, amount);
@@ -72,7 +75,10 @@ contract ERC1404 is ERC20 {
         uint256 amount
     ) public virtual override returns (bool) {
         // added logic restricting transfers
-        require(detectTransferRestriction(from, to, amount) == 0);
+        require(
+            detectTransferRestriction(from, to, amount) == 0,
+            "ERC1404 Transfer Restriction Detected"
+        );
 
         address spender = _msgSender();
         _spendAllowance(from, spender, amount);
