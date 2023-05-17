@@ -1,3 +1,12 @@
+
+### Real Estate Security Token
+This implements the ERC1404 standard which adds some restrictions to ERC20 tokens.
+For this project, token holders needed to be whitelisted only after KYC/AML processes were complete. 
+And they should only be able to trade with others that have also been whitelisted. 
+
+
+-----
+
 Primary objectives..
 
 backend:
